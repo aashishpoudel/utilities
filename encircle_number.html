@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Encirclement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: F0F0F0_1;
+        }
+        .number-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .number {
+            font-size: 3em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+        .number.red { color: red; }
+        .number.blue { color: blue; }
+        .number.green { color: green; }
+        .number.purple { color: purple; }
+        .number.orange { color: orange; }
+
+        .encircled {
+            border-color: black;
+            background-color: lightblue; /* Contrasting fill */
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: 007BFF_1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: 0056B3_1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="number-container">
+        <span class="number red" id="num1">1</span>
+        <span class="number blue" id="num2">2</span>
+        <span class="number green" id="num3">3</span>
+        <span class="number purple" id="num4">4</span>
+        <span class="number orange" id="num5">5</span>
+    </div>
+
+    <input type="number" id="numberInput" placeholder="Enter a number (1-5)">
+    <button onclick="clearCircle()">Clear Circle</button>
+
+    <script>
+        const numberInput = document.getElementById('numberInput');
+        const numbers = document.querySelectorAll('.number');
+
+        numberInput.addEventListener('keypress', function(event) {
+            //  // Clear any existing circle before applying a new one
+            if (event.key == 'Enter'){
+                const enteredNumber = parseInt(this.value);
+
+                clearCircle();
+                if (enteredNumber >= 1 && enteredNumber <= 5) {
+                    const targetNumber = document.getElementById('num' + enteredNumber);
+                    if (targetNumber) {
+                        targetNumber.classList.add('encircled');
+                    }
+                }
+                // this.value=''; //Clear the input box
+            }
+        });
+
+        function clearCircle() {
+            numbers.forEach(num => {
+                num.classList.remove('encircled');
+            });
+            numberInput.value = ''; // Clear the input field
+        }
+    </script>
+</body>
+</html>
